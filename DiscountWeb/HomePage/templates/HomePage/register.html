@@ -1,50 +1,72 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>register</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script>
-    function myFunction(){
-        alert("用户名已存在！");
-    }
-    </script>
-</head>
-<body>
-{% if register_info %}
-<script>
-    window.onload=myFunction;
-</script>
-{% endif %}
-<div class="containter" style="margin-top:10%; width:100%">
-    <div class="row" style="width:90%; margin-left:5%">
-        <div class="col-xs-4 col-xs-offset-4" style="width:100%; margin-left:0px;">
-            <div class="panel panel-default" style="width: 300px; margin: 0 auto">
-                  <div class="panel-heading">
-                          <h3 class="panel-title">用户注册</h3>
-                    </div>
-                 <div class="panel-body">
-                         <form action="/register/?from_page={{ previous_page }}" method="POST">
-                             {% csrf_token %}
-                            <label for="id_username_or_email">用户名或邮箱 </label>
-                            <input name="username" class="form-control" placeholder="请输入用户名或邮箱" required="" id="id_username_or_email" type="text">
-                            <p class="text-danger"></p>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                            <label for="id_password">密码 </label>
-                            <input name="password" class="form-control" placeholder="请输入密码" required="" id="id_password" type="password">
-                            <p class="text-danger"></p>
+    <!-- Bootstrap CSS -->
+      <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+      <link href="{% static 'login/css/register.css' %}" rel="stylesheet" />
 
-                            <span class="pull-left text-danger"></span>
-                            <div class="clearfix"></div>
-                             <input value="注册" class="btn btn-primary pull-right" type="submit" >
-                        </form>
+    <title>Register</title>
+  </head>
+  <body>
 
+  <div class="container">
+            <div class="col">
+              <form class="form-register" action="/register/" method="post">
+
+                  <!-- {% if register_form.captcha.errors %}
+                    <div class="alert alert-warning">{{ register_form.captcha.errors }}</div>
+                  {% elif message %}
+                      <div class="alert alert-warning">{{ message }}</div>
+                  {% endif %} -->
+
+                  {% csrf_token %}
+
+                  <h3 class="text-center">欢迎注册</h3>
+
+                  <div class="form-group">
+                      {{ register_form.username.label_tag }}
+                      {{ register_form.username}}
+                  </div>
+                  <div class="form-group">
+                      {{ register_form.password1.label_tag }}
+                      {{ register_form.password1 }}
+                  </div>
+                  <div class="form-group">
+                      {{ register_form.password2.label_tag }}
+                      {{ register_form.password2 }}
+                  </div>
+                  <div class="form-group">
+                      {{ register_form.email.label_tag }}
+                      {{ register_form.email }}
+                  </div>
+                  <!-- <div class="form-group">
+                      {{ register_form.sex.label_tag }}
+                      {{ register_form.sex }}
+                  </div>
+                  <div class="form-group">
+                      {{ register_form.captcha.label_tag }}
+                      {{ register_form.captcha }}
+                  </div> -->
+
+
+                  <div>
+                  <a href="{% url 'HomePage:login' %}" class="text-success"><ins>直接登录</ins></a>
+                  <button type="submit" class="btn btn-primary float-right">注册</button>
                 </div>
+              </form>
             </div>
+  </div> <!-- /container -->
 
-    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    </div>
-</div>
-</body>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
