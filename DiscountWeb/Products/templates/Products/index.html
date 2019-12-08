@@ -1,0 +1,14 @@
+{% if latest_item_list %}
+    <ul>
+        {% for product in latest_item_list %}
+            <li><a href = "{% url 'Products:detail' product.Product_ID %}">{{ product.ProductName }}</a></li>
+            <li>Original Price:{{ product.OriPrice }}</li>
+            <li>Current Price:{{ product.DisPrice }}</li>
+            
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>No items are avaliable</p>
+{% endif %}
+    
