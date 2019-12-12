@@ -42,8 +42,8 @@ def send_email(email, code):
 
 
 def index(request):
-    if not request.session.get('is_login', None):
-        return redirect('/HomePage/')
+    # if not request.session.get('is_login', None):
+    #     return redirect('/HomePage/')
     return render(request, 'HomePage/index.html')
 
 
